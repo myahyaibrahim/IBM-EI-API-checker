@@ -72,6 +72,7 @@ def main():
 
     # Get all the datasets
     dl_list = catalog.get_data_layers()
+    st.dataframe(dl_list.display())
 
     # Convert the data layers (ibmpair object) to JSON/Dict data type
     dl_list_json = json.loads(dl_list.to_json()) 
