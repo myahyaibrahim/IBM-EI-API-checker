@@ -53,6 +53,7 @@ def main():
     # Title
     st.title("IBM Environmental Intelligence API - Coverage Checker")
     st.header("Simple application for checking geospatial coverage in IBM Environmental Intelligence API")
+    st.subheader("v1.1")
 
     ############################
     # Create connection to server
