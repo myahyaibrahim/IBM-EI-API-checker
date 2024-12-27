@@ -156,10 +156,11 @@ def main():
             
             # Loop through the data layers
             export_dict = {
-                "batch number": selected_batch_number,
-                "total observed data layers": end-start+1,
-                "available data layers (value)": 0,
-                "id data layers": [],
+                "batchNumber": selected_batch_number,
+                "totalObservedDataLayers": end-start+1,
+                "availableDataLayersValue": 0,
+                "idAvailableDataLayers": [],
+                "idMissingDataLayers": [],
             }
 
             for idx in range (start, end+1):
@@ -180,14 +181,14 @@ def main():
                 # print("")
 
                 # Convert to dictionary
-                # print("To dict")
+                print("To dict")
                 query_result_dict = query_result.to_dict()
-                # print(query_result_dict['submit_response'])
-                # print("")
+                print(query_result_dict)
+                print("")
 
                 if (query_result_dict['submit_response']['data'] != []):
-                    export_dict["available data layers (value)"] = export_dict["available data layers (value)"] + 1
-                    export_dict["id data layers"].append(query_result_dict['layers'][0]['id'])
+                    export_dict["availableDataLayersValue"] = export_dict["availableDataLayersValue"] + 1
+                    export_dict["idAvailableDataLayers"].append(query_result_dict['layers'][0]['id'])
                     # Convert the results to a dataframe
                     point_df = query_result.point_data_as_dataframe()
                     # Convert the timestamp to a human readable format
@@ -196,6 +197,7 @@ def main():
                     st.dataframe(point_df)
                 else:
                     st.text("No data found!!! Empty data!!!")
+                    export_dict["idMissingDataLayers"].append(query_result_dict['layers'][0]['id'])
 
             # Dump to JSON File
             filename = "batch_" + str(selected_batch_number) + ".json"
