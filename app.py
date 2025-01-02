@@ -53,7 +53,7 @@ def main():
     # Title
     st.title("IBM Environmental Intelligence API - Coverage Checker")
     st.header("Simple application for checking geospatial coverage in IBM Environmental Intelligence API")
-    st.subheader("v1.1")
+    st.subheader("v1.2")
 
     ############################
     # Create connection to server
@@ -150,7 +150,7 @@ def main():
             # Iterate to check if data layers has data (values) for Jakarta, Indonesia location
             # JKT (Indonesia) = [latitute, longitude] = [ -6.2087634, 106.845599 ]
             st.markdown("## Checking the API Data")
-            start = ((selected_batch_number-1) * batch_size) + 1
+            start = ((selected_batch_number-1) * batch_size)
             end = (selected_batch_number) * batch_size
             if end > total_data_layer:
                 end = total_data_layer
@@ -158,13 +158,13 @@ def main():
             # Loop through the data layers
             export_dict = {
                 "batchNumber": selected_batch_number,
-                "totalObservedDataLayers": end-start+1,
+                "totalObservedDataLayers": end-start,
                 "availableDataLayersValue": 0,
                 "idAvailableDataLayers": [],
                 "idMissingDataLayers": [],
             }
 
-            for idx in range (start, end+1):
+            for idx in range (start, end):
                 print("idx:", idx)
                 query_json = { "name": "Test - Indonesia",
                                 "layers": [ {  "id": dl_spatial_coverage_dict['Global'][idx]['id'], "type": "raster"  } ], 

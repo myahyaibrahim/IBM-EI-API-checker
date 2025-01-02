@@ -104,7 +104,7 @@ for i in range (batch_number):
 # Iterate to check if data layers has data (values) for Jakarta, Indonesia location
 # JKT (Indonesia) = [latitute, longitude] = [ -6.2087634, 106.845599 ]
 selected_batch_number = 1
-start = ((selected_batch_number-1) * batch_size) + 1
+start = ((selected_batch_number-1) * batch_size)
 end = (selected_batch_number) * batch_size
 if end > total_data_layer:
     end = total_data_layer
@@ -112,14 +112,14 @@ if end > total_data_layer:
 # Loop through the data layers
 export_dict = {
     "batch number": selected_batch_number,
-    "total observed data layers": end-start+1,
+    "total observed data layers": end-start,
     "available data layers (value)": 0,
     "id data layers": [],
 }
 
 print(export_dict)
 
-for idx in range (start, end+1):
+for idx in range (start, end):
     print("idx:", idx)
     query_json = { "name": "Test - Indonesia",
                     "layers": [ {  "id": dl_spatial_coverage_dict['Global'][idx]['id'], "type": "raster"  } ], 
